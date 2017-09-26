@@ -2,6 +2,7 @@ function generateInput() {
     let div = $("<div id='myAppDiv'></div>");
     let sibling = $("body").first();
     sibling.prepend(div);
+    sibling.prepend($("<div id='externalContent'></div>"));
     $(div).css("margin-top", "100px");
     inputText = div.append("<input type='text' id='inputName'>");
     inputBtn = div.append("<button type='button' id='inputBtn' placeholder='push me!'>");
@@ -26,13 +27,9 @@ function masterFunction(request, sender, sendResponse) {
         generateInput()
     } else if (request.hasOwnProperty('name')) {
         let textWrapper = $("<span style='color:white'></span>");
-        $("#myAppDiv").append(textWrapper);
-        let divDiv = $("#myAppDiv");
-        if (divDiv.length > 0) {
-            divDiv.querySelectorAll("span")[0].remove();
-        }
-
-        textWrapper.html(request.name);
+        $("#externalContent").html(request.name);
+        
+        // textWrapper.html(request.name);
     }
 }
 
