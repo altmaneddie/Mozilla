@@ -18,7 +18,21 @@ function addEvents() {
         gettingActiveTab.then(function (tabs) {
             browser.tabs.sendMessage(tabs[0].id, { name: "login", username: x, password: y });
         });
+    })
 
+    $("#ytBtn").on("click", function () {
+        alert("got url")
+        var urlRegex = /^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/;
+        var gettingActiveTab = browser.tabs.query({ active: true, currentWindow: true });
+        gettingActiveTab.then(function (tabs) {
+            tempUrl = tabs[0].url;
+            if (urlRegex.test(tempUrl)) {
+                browser.storage.local.set({ url: tempUrl });
+                browser.tabs.sendMessage(tabs[0].id, { name: "yt" });
+            } else {
+                alert("You are not on a valid Youtube page");
+            }
+        });
     })
 }
 
@@ -31,10 +45,26 @@ function popCreator() {
     $("#logIn").append($("<input type='text' id='userName' placeholder='Facebook Username'>"));
     $("#logIn").append($("<input type='password' id='userPass' placeholder='Password'>"));
     $("#logIn").append($("<input type='button' id='nameBtn' value='I&#39;m not sure I should trust this'>"));
-    $("#myExtApp").append($("<div id='writeStuff'></div>"));
-    $("#writeStuff").append($("<input type='button' id='writeBtn' value='I think i wanna write stuff down'>"));
+    $("#myExtApp").append($("<div id='yt'></div>"));
+    $("#yt").append($("<input type='button' id='ytBtn' value='Get this video!'>"));
+    $("#myExtApp").append($("<div id='writeS'></div>"));
+    $("#writeS").append($("<input type='button' id='randomBtn' value='I want to write stuff'>"));
 
     addEvents();
+
+    browser.storage.local.get(url).then((url) => {
+        if (url !== undefined) {
+            alert("url exists")
+            $("#yt").append($("<input type='button' id='ytPlayBtn' value='Play the Video'>"))
+            $("ytPlayBtn").on("click", function () {
+                var gettingActiveTab = browser.tabs.query({ active: true, currentWindow: true });
+                gettingActiveTab.then(function (tabs) {
+                    browser.tabs.sendMessage(tabs[0].id, { name: "playYt", currentUrl: url });
+                });
+            })
+        }
+    })
+
 }
 
 popCreator();

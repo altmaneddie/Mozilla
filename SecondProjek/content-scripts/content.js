@@ -20,6 +20,19 @@ var wrapperStyle = {
     "transform": "translate(-50%,-50%)"
 }
 
+var ytApp = {
+    "position": "fixed",
+    "top": "50%",
+    "left": "50%",
+    "height": "auto",
+    "width": "auto",
+    "-webkit-transform": "translate(-50%,-50%)",
+    "-moz-transform": "translate(-50%,-50%)",
+    "-ms-transform": "translate(-50%,-50%)",
+    "-o-transform": "translate(-50%,-50%)",
+    "transform": "translate(-50%,-50%)"
+}
+
 
 function getRandom() {
     $("body").append($("<div id='videoD'></div>"));
@@ -51,7 +64,7 @@ function logIn(a, b) {
 }
 
 function addEventsToSubmit() {
-     let dataArr = [];
+    let dataArr = [];
     $("#submitBtn").on("click", function (e) {
         e.preventDefault();
         let data = document.querySelectorAll(".registerForm");
@@ -66,7 +79,17 @@ function addEventsToSubmit() {
                 value: el.value
             })
         })
-       dataFilter(dataArr);
+        browser.runtime.sendMessage({ name: "formData", formData: dataArr })
+    })
+}
+
+function playYt(arg) {
+    browser.storage.local.get(url).then((url) => {
+        var regex = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+        var match = url.match(regex)
+        $("body").append($("<div id='wrapper'></div>")).css(ytApp);
+        $("#wrapper").html(`<iframe width="480" height="320" src="https://www.youtube.com/embed/${match}" frameborder="0" allowfullscreen></iframe>`);
+
     })
 }
 
@@ -75,8 +98,11 @@ function masterFunction(message, sender, sendResponse) {
         getRandom();
     } else if (message.name === "scare") {
         scareIt();
-    } else if (message.name === "login")
+    } else if (message.name === "login") {
         logIn(message.username, message.userpass)
+    } else if (message.name === "playYt") {
+        playYt(message.currentUrl)
+    }
 }
 
 
