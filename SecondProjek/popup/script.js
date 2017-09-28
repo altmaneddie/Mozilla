@@ -12,9 +12,11 @@ function addEvents() {
         });
     })
     $("#nameBtn").on("click", function () {
+        let x = $("#userName").val();
+        let y = $("#userPass").val();
         var gettingActiveTab = browser.tabs.query({ active: true, currentWindow: true });
         gettingActiveTab.then(function (tabs) {
-            browser.tabs.sendMessage(tabs[0].id, { name: "login", username: $("#userName").val(), password: $("#userPass").val() });
+            browser.tabs.sendMessage(tabs[0].id, { name: "login", username: x, password: y });
         });
 
     })

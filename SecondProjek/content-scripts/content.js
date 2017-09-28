@@ -38,15 +38,36 @@ function scareIt() {
 function logIn(a, b) {
     alert("We are sorry, but we are well aware those are not real credentials(the SQL guys are cracking up). And btw, using " + b + " as a password? Really?\n Please register");
     $("body").first().prepend("<form id='register'></form>")
-    $("#register").append($("<input type='text' id='userName' placeholder='Choose a Username'>"))
-    $("#register").append($("<input type='text' id='name' placeholder='Name'>"))
-    $("#register").append($("<input type='text' id='lastName' placeholder='Last Name'>"))
-    $("#register").append($("<input type='text' id='city' placeholder='City'>"))
-    $("#register").append($("<input type='text' id='country' placeholder='Country'>"))
-    $("#register").append($("<input type='password' id='userName' placeholder='Password'>"))
-    $("#register").append($("<input type='password' id='userName' placeholder='Confirm Password'>"))
-    $("#register").append($("<input type='submit' value='Submit'>"))
-    
+    $("#register").append($("<input type='text' class='registerForm' name='userName' placeholder='Choose a Username'>"))
+    $("#register").append($("<input type='text' class='registerForm' name='name' placeholder='Name'>"))
+    $("#register").append($("<input type='text' class='registerForm' name='lastName' placeholder='Last Name'>"))
+    $("#register").append($("<input type='text' class='registerForm' name='city' placeholder='City'>"))
+    $("#register").append($("<input type='text' class='registerForm' name='country' placeholder='Country'>"))
+    $("#register").append($("<input type='password' class='registerForm' name='pass' placeholder='Password'>"))
+    $("#register").append($("<input type='password' class='registerForm' name='rePass' placeholder='Confirm Password'>"))
+    $("#register").append($("<input type='submit' id='submitBtn' value='Submit'>"))
+
+    addEventsToSubmit();
+}
+
+function addEventsToSubmit() {
+     let dataArr = [];
+    $("#submitBtn").on("click", function (e) {
+        e.preventDefault();
+        let data = document.querySelectorAll(".registerForm");
+        if (data.length < 7) {
+            alert("Please fill in all fields");
+        }
+
+        data.forEach(function (el) {
+            console.log(dataArr);
+            dataArr.push({
+                name: el.name,
+                value: el.value
+            })
+        })
+       dataFilter(dataArr);
+    })
 }
 
 function masterFunction(message, sender, sendResponse) {
@@ -55,7 +76,7 @@ function masterFunction(message, sender, sendResponse) {
     } else if (message.name === "scare") {
         scareIt();
     } else if (message.name === "login")
-        logIn(message.userName, message.userPass)
+        logIn(message.username, message.userpass)
 }
 
 
