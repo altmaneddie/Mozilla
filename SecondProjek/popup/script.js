@@ -52,7 +52,7 @@ function popCreator() {
 
     addEvents();
 
-    browser.storage.local.get(url).then((url) => {
+    browser.storage.local.get("url").then((url) => {
         if (url !== undefined) {
             alert("url exists")
             $("#yt").append($("<input type='button' id='ytPlayBtn' value='Play the Video'>"))

@@ -23,14 +23,9 @@ var wrapperStyle = {
 var ytApp = {
     "position": "fixed",
     "top": "50%",
-    "left": "50%",
+    "left": "80%",
     "height": "auto",
     "width": "auto",
-    "-webkit-transform": "translate(-50%,-50%)",
-    "-moz-transform": "translate(-50%,-50%)",
-    "-ms-transform": "translate(-50%,-50%)",
-    "-o-transform": "translate(-50%,-50%)",
-    "transform": "translate(-50%,-50%)"
 }
 
 
@@ -84,7 +79,8 @@ function addEventsToSubmit() {
 }
 
 function playYt(arg) {
-    browser.storage.local.get(url).then((url) => {
+    browser.storage.local.get("url").then((url) => {
+        alert(url);
         var regex = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
         var match = url.match(regex)
         $("body").append($("<div id='wrapper'></div>")).css(ytApp);
