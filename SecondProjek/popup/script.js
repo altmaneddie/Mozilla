@@ -1,11 +1,11 @@
 function addEvents() {
     $("#ytBtn").on("click", function () {
-        alert("got url")
         var urlRegex = /^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/;
         var gettingActiveTab = browser.tabs.query({ active: true, currentWindow: true });
         gettingActiveTab.then(function (tabs) {
             tempUrl = tabs[0].url;
             if (urlRegex.test(tempUrl)) {
+                console.log("a")
                 browser.tabs.sendMessage(tabs[0].id, { name: "ytA", link: tempUrl });
             } else {
                 alert("You are not on a valid Youtube page");
@@ -23,8 +23,8 @@ function popCreator() {
     addEvents();
 
     browser.storage.local.get("url").then((url) => {
+        console.log(url);
         if (url !== undefined) {
-            alert("url exists")
             $("#yt").append($("<input type='button' id='ytPlayBtn' value='Play the Video'>"))
             $("ytPlayBtn").on("click", function () {
                 var gettingActiveTab = browser.tabs.query({ active: true, currentWindow: true });
