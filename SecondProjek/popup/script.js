@@ -21,14 +21,12 @@ function addEvents() {
     })
 
     $("#ytBtn").on("click", function () {
-        alert("got url")
         var urlRegex = /^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/;
         var gettingActiveTab = browser.tabs.query({ active: true, currentWindow: true });
         gettingActiveTab.then(function (tabs) {
             tempUrl = tabs[0].url;
             if (urlRegex.test(tempUrl)) {
                 browser.storage.local.set({ url: tempUrl });
-                browser.tabs.sendMessage(tabs[0].id, { name: "yt" });
             } else {
                 alert("You are not on a valid Youtube page");
             }
@@ -52,19 +50,24 @@ function popCreator() {
 
     addEvents();
 
-    browser.storage.local.get("url").then((url) => {
-        if (url !== undefined) {
-            alert("url exists")
-            $("#yt").append($("<input type='button' id='ytPlayBtn' value='Play the Video'>"))
-            $("ytPlayBtn").on("click", function () {
-                var gettingActiveTab = browser.tabs.query({ active: true, currentWindow: true });
-                gettingActiveTab.then(function (tabs) {
-                    browser.tabs.sendMessage(tabs[0].id, { name: "playYt", currentUrl: url });
-                });
-            })
+    browser.storage.local.get("url").then((obj) => {
+        if (obj.hasOwnProperty("url")) {
+            if (obj.url !== undefined && obj.url !== "" && obj.url !== null) {
+                $("#yt").append($("<input type='button' id='ytPlayBtn' value='Play the Video'>"))
+                $("#ytPlayBtn").on("click", function () {
+                    var gettingActiveTab = browser.tabs.query({ active: true, currentWindow: true });
+                    gettingActiveTab.then(function (tabs) {
+                        browser.tabs.sendMessage(tabs[0].id, { name: "playYt", currentUrl: obj.url });
+                    });
+                })
+            }
         }
     })
 
 }
 
 popCreator();
+
+
+// options = video list/ editable list!
+// contents = song changer

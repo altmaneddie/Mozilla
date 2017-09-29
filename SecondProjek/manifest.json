@@ -20,8 +20,13 @@
       },
     
     "web_accessible_resources":[ 
-    ] 
-      ,
+    ],
+    
+    "applications": {
+      "gecko": {
+        "id": "999inOne@example.com"
+      }
+    },
   
     "permissions": ["storage", "tabs", "activeTab"]    
   }

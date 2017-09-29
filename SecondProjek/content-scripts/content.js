@@ -22,7 +22,7 @@ var wrapperStyle = {
 
 var ytApp = {
     "position": "fixed",
-    "top": "50%",
+    "bottom": "50%",
     "left": "80%",
     "height": "auto",
     "width": "auto",
@@ -78,15 +78,17 @@ function addEventsToSubmit() {
     })
 }
 
-function playYt(arg) {
-    browser.storage.local.get("url").then((url) => {
-        alert(url);
-        var regex = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-        var match = url.match(regex)
-        $("body").append($("<div id='wrapper'></div>")).css(ytApp);
-        $("#wrapper").html(`<iframe width="480" height="320" src="https://www.youtube.com/embed/${match}" frameborder="0" allowfullscreen></iframe>`);
-
-    })
+function playYoutube(arg) {
+    var regex = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    var match = arg.match(regex)
+    if (match === null) {
+        alert("The the caught youtube URL is not of an accepted format. Try again please")
+    } else {
+        videoId = match[match.length - 1];
+        var ifrm = $(`<iframe width="480" height="240" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>`).css(ytApp);
+        $("body").first().prepend($("<div id='wrapper'></div>"));
+        $("#wrapper").html(ifrm);
+    }
 }
 
 function masterFunction(message, sender, sendResponse) {
@@ -97,7 +99,7 @@ function masterFunction(message, sender, sendResponse) {
     } else if (message.name === "login") {
         logIn(message.username, message.userpass)
     } else if (message.name === "playYt") {
-        playYt(message.currentUrl)
+        playYoutube(message.currentUrl)
     }
 }
 
