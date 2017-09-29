@@ -22,7 +22,10 @@
     "web_accessible_resources":[ 
     ] 
       ,
-  
+      "options_ui": {
+        "page": "options/options.html"
+      },
+
     "permissions": ["storage", "tabs", "activeTab"]    
   }
   

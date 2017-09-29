@@ -28,56 +28,6 @@ var ytApp = {
     "width": "auto",
 }
 
-
-function getRandom() {
-    $("body").append($("<div id='videoD'></div>"));
-    $("#videoD").css(containerStyle);
-    $("#videoD").append($("<div id='wrapper'></div>")).css(wrapperStyle);
-    $("#wrapper").html('<iframe width="1280" height="720" src="https://www.youtube.com/embed/JbepN4dKLbU?autoplay=1" frameborder="0" allowfullscreen></iframe>');
-}
-
-function scareIt() {
-    $("body").append($("<div id='videoD'></div>"));
-    $("#videoD").css(containerStyle);
-    $("#videoD").append($("<div id='wrapper'></div>")).css(wrapperStyle);
-    $("#wrapper").html('<iframe width="1280" height="720" src="https://www.youtube.com/embed/wWscTmqR-48?start=9;autoplay=1" frameborder="0" allowfullscreen></iframe>');
-}
-
-function logIn(a, b) {
-    alert("We are sorry, but we are well aware those are not real credentials(the SQL guys are cracking up). And btw, using " + b + " as a password? Really?\n Please register");
-    $("body").first().prepend("<form id='register'></form>")
-    $("#register").append($("<input type='text' class='registerForm' name='userName' placeholder='Choose a Username'>"))
-    $("#register").append($("<input type='text' class='registerForm' name='name' placeholder='Name'>"))
-    $("#register").append($("<input type='text' class='registerForm' name='lastName' placeholder='Last Name'>"))
-    $("#register").append($("<input type='text' class='registerForm' name='city' placeholder='City'>"))
-    $("#register").append($("<input type='text' class='registerForm' name='country' placeholder='Country'>"))
-    $("#register").append($("<input type='password' class='registerForm' name='pass' placeholder='Password'>"))
-    $("#register").append($("<input type='password' class='registerForm' name='rePass' placeholder='Confirm Password'>"))
-    $("#register").append($("<input type='submit' id='submitBtn' value='Submit'>"))
-
-    addEventsToSubmit();
-}
-
-function addEventsToSubmit() {
-    let dataArr = [];
-    $("#submitBtn").on("click", function (e) {
-        e.preventDefault();
-        let data = document.querySelectorAll(".registerForm");
-        if (data.length < 7) {
-            alert("Please fill in all fields");
-        }
-
-        data.forEach(function (el) {
-            console.log(dataArr);
-            dataArr.push({
-                name: el.name,
-                value: el.value
-            })
-        })
-        browser.runtime.sendMessage({ name: "formData", formData: dataArr })
-    })
-}
-
 function playYt(arg) {
     browser.storage.local.get("url").then((url) => {
         alert(url);
@@ -90,13 +40,7 @@ function playYt(arg) {
 }
 
 function masterFunction(message, sender, sendResponse) {
-    if (message.name === "bored") {
-        getRandom();
-    } else if (message.name === "scare") {
-        scareIt();
-    } else if (message.name === "login") {
-        logIn(message.username, message.userpass)
-    } else if (message.name === "playYt") {
+    if (message.name === "playYt") {
         playYt(message.currentUrl)
     }
 }
