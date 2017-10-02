@@ -1,7 +1,16 @@
 function addEventsToDisplayedPlaylist() {
-    $(".delBtn").on("click", function (e) {
-        e.preventDefault;
-        console.log(e);
+    let myNodeList = document.querySelectorAll(".delBtn");
+    myNodeList.forEach((el) => {
+        el.addEventListener("click", function (e) {
+            e.preventDefault;
+            index = e.id;
+            browser.storage.local.get("ytPL").then((playList) => {
+                let currPlayList = playList.ytPL;
+                currPlayList.splice(index, 1);
+                browser.storage.local.set({ ytPL: currPlayList });
+                displayPlaylist();
+            })
+        })
     })
 }
 
@@ -9,8 +18,7 @@ function displayPlaylist() {
     browser.storage.local.get("ytPL").then((obj) => {
         var tempPl = obj.ytPL;
         console.log(tempPl)
-        let dispPl = tempPl.map((el, i) => `<li><iframe class="delBtn" id="${i}" width="320" height="240" src="https://www.youtube.com/embed/${el}" frameborder="0"></iframe></li><button type="button" id="b${i}">Delete video</button>`).join('');
-        console.log(dispPl)
+        let dispPl = tempPl.map((el, i) => `<li><iframe id="${i}" width="320" height="240" src="https://www.youtube.com/embed/${el}" frameborder="0"></iframe></li><button type="button" class="delBtn" id="b${i}">Delete video</button>`).join('');
         $("#listWrapper").html(dispPl);
         addEventsToDisplayedPlaylist();
     })
