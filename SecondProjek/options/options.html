@@ -1,15 +1,27 @@
 <DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Options</title>
-</head>
-<body>
-    <h1>Your Playlist:</h1>
-    <div id="playList">Haha</div>
+    <html lang="en">
 
-    <script src="options.js"></script>
-</body>
-</html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Options</title>
+        <link rel="stylesheet" href="options.css">
+        <script src="../jquery-3.2.1.js"></script>
+    </head>
+
+    <body>
+        <label for="uname">To add a video, insert URL here: </label>
+        <input type="text" id="addVidText">
+        <button type="button" id="addVidBtn">Add Video</button>
+        <h1>Your Playlist:</h1>
+        <div id="playList">
+            <ol id="listWrapper">
+
+            </ol>
+        </div>
+
+        <script src="options.js"></script>
+    </body>
+
+    </html>

@@ -15,8 +15,7 @@
     ],
 
     "background": {
-     "scripts": ["background/background-scripts.js",
-      "jquery-3.2.1.js"]
+     "scripts": ["jquery-3.2.1.js","background/background-scripts.js"]
       },
     
     "web_accessible_resources":[ 

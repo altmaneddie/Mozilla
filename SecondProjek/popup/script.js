@@ -1,14 +1,17 @@
 // Auto-Add button => add current url to playlist.
 function addEvents() {
     $("#ytBtn").on("click", function () {
-        var urlRegex = /^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/;
+        var urlRegexTester = /^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/;
+        var regexMatcher = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
         var gettingActiveTab = browser.tabs.query({ active: true, currentWindow: true });
         gettingActiveTab.then(function (tabs) {
             tempUrl = tabs[0].url;
-            if (urlRegex.test(tempUrl)) {
+            if (urlRegexTester.test(tempUrl)) {
                 browser.storage.local.get("ytPL").then((playList) => {
-                    let currPlayList = playList.ytPL;
-                    currPlayList.push(tempUrl);
+                    let currPlayList = [playList.ytPL];
+                    var match = tempUrl.match(regexMatcher);
+                    currPlayList.push(match[2]);
+                    console.log(match[2]);
                     browser.storage.local.set({ ytPL: currPlayList });
                 })
             } else {

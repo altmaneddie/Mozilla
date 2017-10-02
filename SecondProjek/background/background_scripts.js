@@ -1,3 +1,10 @@
+
+
+
+
+
+
+
 function masterFunction(message, sender, sendResponse) {
     console.log("entered background");
     if (message.hasOwnProperty("name")) {

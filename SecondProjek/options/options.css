@@ -1,0 +1,39 @@
+#addVidBtn{
+    background: #3498db;
+    background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+    background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+    background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+    background-image: -o-linear-gradient(top, #3498db, #2980b9);
+    background-image: linear-gradient(to bottom, #3498db, #2980b9);
+    -webkit-border-radius: 28;
+    -moz-border-radius: 28;
+    border-radius: 28px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 20px;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+}
+
+#addVidBtn:hover {
+    background: #3cb0fd;
+    background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+    background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+    background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+    background-image: -o-linear-gradient(top, #3498db, #2980b9);
+    background-image: linear-gradient(to bottom, #3498db, #2980b9);
+    text-decoration: none;
+  }
+
+  #addVidText{
+    padding: 7px;
+    font-size: 16px;
+    border-width: 1px;
+    border-color: #ffffff;
+    background-color: #3498db;
+    color: #ffffff;
+    border-style: solid;
+    border-radius: 28px;
+    box-shadow: 0px 0px 5px rgba(66,66,66,.75);
+    text-shadow: undefined 0px 0px 5px px rgba(66,66,66,.75);
+  }
