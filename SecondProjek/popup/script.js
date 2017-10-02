@@ -5,14 +5,21 @@ function addEvents() {
         var regexMatcher = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
         var gettingActiveTab = browser.tabs.query({ active: true, currentWindow: true });
         gettingActiveTab.then(function (tabs) {
-            tempUrl = tabs[0].url;
-            if (urlRegexTester.test(tempUrl)) {
+            newURL = tabs[0].url;
+            if (urlRegexTester.test(newURL)) {
                 browser.storage.local.get("ytPL").then((playList) => {
-                    let currPlayList = [playList.ytPL];
-                    var match = tempUrl.match(regexMatcher);
-                    currPlayList.push(match[2]);
-                    console.log(match[2]);
-                    browser.storage.local.set({ ytPL: currPlayList });
+                    if (playList.ytPL === undefined) {
+                        playList.ytPL = []
+                        let currPlayList = playList.ytPL;
+                        var match = newURL.match(regexMatcher);
+                        currPlayList.push(match[2]);
+                        browser.storage.local.set({ ytPL: currPlayList });
+                    } else {
+                        let currPlayList = playList.ytPL;
+                        var match = newURL.match(regexMatcher);
+                        currPlayList.push(match[2]);
+                        browser.storage.local.set({ ytPL: currPlayList });
+                    }
                 })
             } else {
                 alert("You are not on a valid Youtube page");
@@ -23,14 +30,14 @@ function addEvents() {
 
 // Add button => play video if storage has been changed and playlist length is 1 (so it wont repeat itself and no button will appear when to item is in the playlist)
 function playBtn() {
-    browser.storage.local.get().then((url) => {
-        if (Object.keys(url).length !== 0) {
-            if (url.ytPL.length !== 0 && url.ytPL.length < 2) {
+    browser.storage.local.get().then((playList) => {
+        if (Object.keys(playList).length !== 0) {
+            if (playList.ytPL.length !== 0 && playList.ytPL.length < 2) {
                 $("#yt").append($("<input type='button' id='ytPlayBtn' value='Play the Video'>"))
                 $("ytPlayBtn").on("click", function () {
                     var gettingActiveTab = browser.tabs.query({ active: true, currentWindow: true });
                     gettingActiveTab.then(function (tabs) {
-                        browser.tabs.sendMessage(tabs[0].id, { name: "playYt", currentUrl: url });
+                        browser.tabs.sendMessage(tabs[0].id, { name: "playYt" });
                     });
                 })
             }

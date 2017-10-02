@@ -28,7 +28,7 @@ var ytApp = {
     "width": "auto",
 }
 
-function playYt(arg) {
+function playYt() {
     browser.storage.local.get("url").then((url) => {
         alert(url);
         var regex = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
@@ -41,7 +41,7 @@ function playYt(arg) {
 
 function masterFunction(message, sender, sendResponse) {
     if (message.name === "playYt") {
-        playYt(message.currentUrl)
+        playYt();
     }
 }
 
