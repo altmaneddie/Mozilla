@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
-    "name": "999inOne",
-    "description": "Everyone will start floating",
+    "name": "Sir Tubes-A-lot",
+    "description": "Take your favorite videos with you anytime!",
     "version": "1.0",
   
     "browser_action": {
@@ -14,10 +14,6 @@
         "js": ["jquery-3.2.1.js", "content-scripts/content.js"]}
     ],
 
-    "background": {
-     "scripts": ["jquery-3.2.1.js","background/background-scripts.js"]
-      },
-    
     "web_accessible_resources":[ 
     ] 
       ,
