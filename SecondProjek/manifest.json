@@ -23,7 +23,7 @@
 
       "applications": {
         "gecko": {
-          "id": "addon@example.com",
+          "id": "eduard.altman@softvision.ro",
           "strict_min_version": "42.0"
         }
       },
