@@ -1,12 +1,4 @@
-
-
-
-
-
-
-
 function masterFunction(message, sender, sendResponse) {
-    console.log("entered background");
     if (message.hasOwnProperty("name")) {
         console.log("entered if");
         browser.storage.local.get("ytPL").then((url) => {
@@ -26,4 +18,4 @@ function masterFunction(message, sender, sendResponse) {
 }
 
 
-browser.runtime.onMessage.addListener(masterFunction);
+browser.runtime.onMessage.addListener(backgroundFunction);

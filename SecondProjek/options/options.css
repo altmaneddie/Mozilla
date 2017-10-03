@@ -25,15 +25,32 @@
     text-decoration: none;
   }
 
-  #addVidText{
-    padding: 7px;
-    font-size: 16px;
-    border-width: 1px;
-    border-color: #ffffff;
-    background-color: #3498db;
-    color: #ffffff;
-    border-style: solid;
-    border-radius: 28px;
-    box-shadow: 0px 0px 5px rgba(66,66,66,.75);
-    text-shadow: undefined 0px 0px 5px px rgba(66,66,66,.75);
-  }
+#addVidText{
+  padding: 7px;
+  font-size: 16px;
+  border-width: 1px;
+  border-color: #ffffff;
+  background-color: #3498db;
+  color: #ffffff;
+  border-style: solid;
+  border-radius: 28px;
+  box-shadow: 0px 0px 5px rgba(66,66,66,.75);
+  text-shadow: undefined 0px 0px 5px px rgba(66,66,66,.75);
+}
+
+ol {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.delBtn {
+  width: 100%;
+  text-align: center;
+}
+
+iframe {  
+  display: block;
+}
+.vid {
+  margin: 10px;
+}

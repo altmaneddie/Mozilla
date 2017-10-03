@@ -28,13 +28,13 @@ function addEvents() {
     })
 }
 
-// Add button => play video if storage has been changed and playlist length is 1 (so it wont repeat itself and no button will appear when to item is in the playlist)
+// Add button => play video if storage has been changed (so it wont repeat itself and no button will appear when to item is in the playlist)
 function playBtn() {
-    browser.storage.local.get().then((playList) => {
+    browser.storage.local.get("ytPL").then((playList) => {
         if (Object.keys(playList).length !== 0) {
-            if (playList.ytPL.length !== 0 && playList.ytPL.length < 2) {
+            if (playList.ytPL.length !== 0 && $('#ytPlayBtn').length == 0) {
                 $("#yt").append($("<input type='button' id='ytPlayBtn' value='Play the Video'>"))
-                $("ytPlayBtn").on("click", function () {
+                $("#ytPlayBtn").on("click", function () {
                     var gettingActiveTab = browser.tabs.query({ active: true, currentWindow: true });
                     gettingActiveTab.then(function (tabs) {
                         browser.tabs.sendMessage(tabs[0].id, { name: "playYt" });
@@ -55,6 +55,7 @@ function popCreator() {
     $("#writeS").append($("<input type='button' id='randomBtn' value='I want to write stuff'>"));
 
     addEvents();
+    playBtn();
 }
 
 popCreator();
