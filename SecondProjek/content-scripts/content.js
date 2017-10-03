@@ -40,11 +40,9 @@ function addEventsToRandomBtn() {
 
 function vidCreator(id) {
     if (document.getElementById("ytWrapper")) {
-        console.log("im in the vidcreator if")
         $("#ytWrapper").remove()
         $("#randomBtn").off("click", Event)
     }
-    console.log("im after the vidcreator if")
     $("body").first().prepend($("<div id='ytWrapper'></div>").css(ytApp));
     $("#ytWrapper").html(`<iframe width="480" height="320" src="https://www.youtube.com/embed/${id}" frameborder="0" allowfullscreen></iframe>`);
     $("#ytWrapper").append($('<button type="button" id="randomBtn">Randomize</button>').css(ytRandomBtn));
@@ -59,9 +57,7 @@ function playYt(ind = 0) {
             ind = Math.floor((Math.random() * nrOfItems) + 1)
             item = playList[ind - 1];
             vidCreator(item);
-            console.log("1st if")            
         } else {
-            console.log("2nd if")     
             vidCreator(playList[0]);
         }
     })
@@ -69,7 +65,6 @@ function playYt(ind = 0) {
 
 function masterFunction(message, sender, sendResponse) {
     if (message.name === "playYt") {
-        console.log("master function");
         playYt();
     }
 }

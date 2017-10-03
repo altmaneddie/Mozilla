@@ -17,7 +17,6 @@ function addEventsToDisplayedPlaylist() {
 function displayPlaylist() {
     browser.storage.local.get("ytPL").then((obj) => {
         var tempPl = obj.ytPL;
-        console.log(tempPl)
         let dispPl = tempPl.map((el, i) => `<li class="vid"><iframe id="${i}" width="320" height="240" src="https://www.youtube.com/embed/${el}" frameborder="0"></iframe><button type="button" class="delBtn" id="${i}">Delete video</button></li>`).join('');
         $("#listWrapper").html(dispPl);
         addEventsToDisplayedPlaylist();
