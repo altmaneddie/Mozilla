@@ -1,25 +1,3 @@
-var containerStyle = {
-    "position": "fixed",
-    "top": "0",
-    "left": "0",
-    "height": "100%",
-    "width": "100%",
-    "background-color": "rgba(0,0,0,0.8)"
-}
-
-var ytWrapperStyle = {
-    "position": "fixed",
-    "top": "50%",
-    "left": "50%",
-    "height": "auto",
-    "width": "auto",
-    "-webkit-transform": "translate(-50%,-50%)",
-    "-moz-transform": "translate(-50%,-50%)",
-    "-ms-transform": "translate(-50%,-50%)",
-    "-o-transform": "translate(-50%,-50%)",
-    "transform": "translate(-50%,-50%)"
-}
-
 var ytApp = {
     "position": "fixed",
     "top": "50%",
