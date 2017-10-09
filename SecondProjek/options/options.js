@@ -7,7 +7,9 @@ function addEventsToDisplayedPlaylist() {
             browser.storage.local.get("ytPL").then((playList) => {
                 let currPlayList = playList.ytPL;
                 currPlayList.splice(index, 1);
-                browser.storage.local.set({ ytPL: currPlayList });
+                browser.storage.local.set({
+                    ytPL: currPlayList
+                });
                 displayPlaylist();
             })
         })
@@ -18,13 +20,22 @@ function displayPlaylist() {
     browser.storage.local.get("ytPL").then((obj) => {
         let tempPl = obj.ytPL;
         let nrOfItems = tempPl.length;
-        for(i=0;i=nrOfItems;i++){
+        for (i = 0; i = nrOfItems; i++) {
             $("#listWrapper").append(`<li class="vid"><iframe></iframe><button class="delBtn">Delete video</button></li>`);
         }
-        let dispPl = tempPl.map((el, i) => `<li class="vid"><iframe id="${i}" width="320" height="240" src="https://www.youtube.com/embed/${el}" frameborder="0"></iframe><button type="button" class="delBtn" id="${i}">Delete video</button></li>`).join('');
         let tempNl = document.querySelectorAll("iframe");
-        tempNl.forEach(function(el,ind){
-            
+        let tempBtn = document.querySelectorAll(".delBtn");
+        tempNl.forEach(function (el, ind) {
+            el.attr({
+                id: i,
+                width: "320",
+                height: "320",
+                src: `https://www.youtube.com/embed/${tempPl[i]}`,
+                frameborder: "0"
+            });
+        })
+        tempBtn.forEach(function (el, ind) {
+            el.attr("id", ind);
         })
         addEventsToDisplayedPlaylist();
     })
@@ -41,12 +52,16 @@ function addURL() {
                 let currPlayList = playList.ytPL;
                 var match = newURL.match(regexMatcher);
                 currPlayList.push(match[2]);
-                browser.storage.local.set({ ytPL: currPlayList });
+                browser.storage.local.set({
+                    ytPL: currPlayList
+                });
             } else {
                 let currPlayList = playList.ytPL;
                 var match = newURL.match(regexMatcher);
                 currPlayList.push(match[2]);
-                browser.storage.local.set({ ytPL: currPlayList });
+                browser.storage.local.set({
+                    ytPL: currPlayList
+                });
                 displayPlaylist();
             }
         })
@@ -55,7 +70,7 @@ function addURL() {
     }
 }
 
-function userOptCreator(){
+function userOptCreator() {
     e.preventDefault;
     let userOpt = {};
     let hposition = document.querySelector('input[name = "hposition"]:checked').value;
@@ -65,13 +80,15 @@ function userOptCreator(){
     userOpt.hposition = hposition;
     userOpt.vposition = vposition;
     userOpt.size = size;
-    browser.storage.local.set({ options: userOpt });
+    browser.storage.local.set({
+        options: userOpt
+    });
 }
 
 
 $("#addVidBtn").on("click", addURL);
 
-$("#visualOpt").on("click",userOptCreator);
+$("#visualOpt").on("click", userOptCreator);
 browser.storage.onChanged.addListener(displayPlaylist);
 displayPlaylist();
 
