@@ -38,6 +38,10 @@
   text-shadow: undefined 0px 0px 5px px rgba(66,66,66,.75);
 }
 
+.verticalSection{
+  display:flex;
+}
+
 ol {
   display: flex;
   flex-wrap: wrap;

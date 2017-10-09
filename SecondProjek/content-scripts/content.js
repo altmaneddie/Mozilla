@@ -1,9 +1,10 @@
 var ytApp = {
     "position": "fixed",
     "top": "50%",
-    "left": "2%",
+    "right": "2%",
     "height": "auto",
     "width": "auto",
+    "z-index": 9999
 }
 var ytRandomBtn = {
     'display': 'block',
@@ -22,7 +23,7 @@ function vidCreator(id) {
         $("#randomBtn").off("click", Event)
     }
     $("body").first().prepend($("<div id='ytWrapper'></div>").css(ytApp));
-    $("#ytWrapper").html(`<iframe width="480" height="320" src="https://www.youtube.com/embed/${id}" frameborder="0" allowfullscreen></iframe>`);
+    $("#ytWrapper").html(`<iframe width="320" height="240" src="https://www.youtube.com/embed/${id}" frameborder="0" allowfullscreen></iframe>`);
     $("#ytWrapper").append($('<button type="button" id="randomBtn">Randomize</button>').css(ytRandomBtn));
     addEventsToRandomBtn();
 }

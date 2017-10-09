@@ -15,11 +15,41 @@
         <input type="text" id="addVidText">
         <button type="button" id="addVidBtn">Add Video</button>
         <h1>Your Playlist:</h1>
-        <div id="playList">
-            <ol id="listWrapper">
+        <section class="verticalSection">
+            <div id="playList">
+                <ol id="listWrapper">
 
-            </ol>
-        </div>
+                </ol>
+            </div>
+            <div>Display Options:
+                <form>
+                    <ul>
+                        <li>
+                            <label for="hposition">Horizontal Positioning</label>
+                            <input type="radio" name="hposition" id="hLeft" value="Left">Left
+                            <input type="radio" name="hposition" id="hRight" value="Right">Right
+                        </li>
+                        <li>
+                            <label for="vposition">Vertical Positioning</label>
+                            <input type="radio" name="vposition" id="vtop" value="Top">Top
+                            <input type="radio" name="vposition" id="vmid" value="Middle">Middle
+                            <input type="radio" name="vposition" id="vdown" value="Lower">Lower Mid
+                            <input type="radio" name="vposition" id="vbot" value="Bottom">Bottom
+                        </li>
+                        <li>
+                            <label for="size">size</label>
+                            <input type="radio" name="size" id="v1" value="240p">240p
+                            <input type="radio" name="size" id="v2" value="360p">360p
+                            <input type="radio" name="size" id="v3" value="480p">480p
+                            <input type="radio" name="size" id="v4" value="720p">720p
+                        </li>
+                        <li>
+                            <input type="submit" id="visualOpt" value="Apply Options">
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </section>
 
         <script src="options.js"></script>
     </body>

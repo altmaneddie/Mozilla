@@ -16,9 +16,16 @@ function addEventsToDisplayedPlaylist() {
 
 function displayPlaylist() {
     browser.storage.local.get("ytPL").then((obj) => {
-        var tempPl = obj.ytPL;
+        let tempPl = obj.ytPL;
+        let nrOfItems = tempPl.length;
+        for(i=0;i=nrOfItems;i++){
+            $("#listWrapper").append(`<li class="vid"><iframe></iframe><button class="delBtn">Delete video</button></li>`);
+        }
         let dispPl = tempPl.map((el, i) => `<li class="vid"><iframe id="${i}" width="320" height="240" src="https://www.youtube.com/embed/${el}" frameborder="0"></iframe><button type="button" class="delBtn" id="${i}">Delete video</button></li>`).join('');
-        $("#listWrapper").html(dispPl);
+        let tempNl = document.querySelectorAll("iframe");
+        tempNl.forEach(function(el,ind){
+            
+        })
         addEventsToDisplayedPlaylist();
     })
 }
@@ -48,7 +55,24 @@ function addURL() {
     }
 }
 
+function userOptCreator(){
+    e.preventDefault;
+    let userOpt = {};
+    let hposition = document.querySelector('input[name = "hposition"]:checked').value;
+    let vposition = document.querySelector('input[name = "vposition"]:checked').value;
+    let size = document.querySelector('input[name = "size"]:checked').value;
+
+    userOpt.hposition = hposition;
+    userOpt.vposition = vposition;
+    userOpt.size = size;
+    browser.storage.local.set({ options: userOpt });
+}
+
+
 $("#addVidBtn").on("click", addURL);
 
+$("#visualOpt").on("click",userOptCreator);
 browser.storage.onChanged.addListener(displayPlaylist);
 displayPlaylist();
+
+$().attr()
