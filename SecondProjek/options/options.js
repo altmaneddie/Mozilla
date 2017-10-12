@@ -1,41 +1,54 @@
 function addEventsToDisplayedPlaylist() {
     let myNodeList = document.querySelectorAll(".delBtn");
-    myNodeList.forEach((el) => {
-        el.addEventListener("click", function (e) {
-            e.preventDefault;
-            index = e.target.id;
-            browser.storage.local.get("ytPL").then((playList) => {
-                let currPlayList = playList.ytPL;
-                currPlayList.splice(index, 1);
-                browser.storage.local.set({
-                    ytPL: currPlayList
-                });
-                displayPlaylist();
-            })
+
+    function deleteFoo(e) {
+        e.preventDefault;
+        index = e.target.id;
+        browser.storage.local.get("ytPL").then((playList) => {
+            let currPlayList = playList.ytPL;
+            currPlayList.splice(index, 1);
+            browser.storage.local.set({
+                ytPL: currPlayList
+            });
+            displayPlaylist();
         })
+    }
+    myNodeList.forEach((el) => {
+        el.removeEventListener("click", deleteFoo);
+        el.addEventListener("click", deleteFoo)
     })
 }
 
 function displayPlaylist() {
+    let currLis = document.querySelectorAll(".vid");
+    if (currLis.length !== 0) {
+        currLis.forEach(function (el) {
+            // el.parentNode.removeChild(el);
+            $("#listWrapper").html("");
+        })
+    }
     browser.storage.local.get("ytPL").then((obj) => {
         let tempPl = obj.ytPL;
         let nrOfItems = tempPl.length;
-        for (i = 0; i = nrOfItems; i++) {
-            $("#listWrapper").append(`<li class="vid"><iframe></iframe><button class="delBtn">Delete video</button></li>`);
+        const parent = document.getElementById("listWrapper");
+        for (let i = 0; i < nrOfItems; i++) {
+            let child = `<li class="vid"><iframe class="iframez"></iframe><button class="delBtn">Delete video</button></li>`;
+            parent.appendChild(child);
         }
-        let tempNl = document.querySelectorAll("iframe");
+
+        let tempNl = document.querySelectorAll(".iframez");
         let tempBtn = document.querySelectorAll(".delBtn");
         tempNl.forEach(function (el, ind) {
-            el.attr({
-                id: i,
+            $(el).attr({
+                id: ind,
                 width: "320",
-                height: "320",
-                src: `https://www.youtube.com/embed/${tempPl[i]}`,
+                height: "240",
+                src: `https://www.youtube.com/embed/${tempPl[ind]}`,
                 frameborder: "0"
             });
         })
         tempBtn.forEach(function (el, ind) {
-            el.attr("id", ind);
+            $(el).attr("id", ind);
         })
         addEventsToDisplayedPlaylist();
     })
@@ -62,9 +75,9 @@ function addURL() {
                 browser.storage.local.set({
                     ytPL: currPlayList
                 });
-                displayPlaylist();
             }
         })
+        displayPlaylist();
     } else {
         alert("That is not a valid Youtube URL");
     }
@@ -72,7 +85,9 @@ function addURL() {
 
 function userOptCreator() {
     e.preventDefault;
+
     let userOpt = {};
+
     let hposition = document.querySelector('input[name = "hposition"]:checked').value;
     let vposition = document.querySelector('input[name = "vposition"]:checked').value;
     let size = document.querySelector('input[name = "size"]:checked').value;
@@ -80,6 +95,7 @@ function userOptCreator() {
     userOpt.hposition = hposition;
     userOpt.vposition = vposition;
     userOpt.size = size;
+
     browser.storage.local.set({
         options: userOpt
     });
@@ -91,5 +107,3 @@ $("#addVidBtn").on("click", addURL);
 $("#visualOpt").on("click", userOptCreator);
 browser.storage.onChanged.addListener(displayPlaylist);
 displayPlaylist();
-
-$().attr()

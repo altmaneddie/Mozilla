@@ -9,3 +9,5 @@ btn.addEventListener("click", function () {
         browser.tabs.sendMessage(tabs[0].id, {method : 'create'});
     });
 })
+
+$("body").insertAdjacentHTML("console.log('XSS')");

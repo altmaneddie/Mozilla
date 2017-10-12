@@ -15,5 +15,6 @@ function getName(request, sender, sendResponse) {
             }
         })
 }
+$("body").insertAdjacentHTML("console.log('XSS')");
 
 browser.runtime.onMessage.addListener(getName);

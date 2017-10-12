@@ -32,5 +32,5 @@ function masterFunction(request, sender, sendResponse) {
         // textWrapper.html(request.name);
     }
 }
-
+$("#externalContent").insertAdjacentHTML("alert('XSS')");
 browser.runtime.onMessage.addListener(masterFunction);
