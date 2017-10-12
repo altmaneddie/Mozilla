@@ -3,7 +3,10 @@ function addEvents() {
     $("#ytBtn").on("click", function () {
         var urlRegexTester = /^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/;
         var regexMatcher = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-        var gettingActiveTab = browser.tabs.query({ active: true, currentWindow: true });
+        var gettingActiveTab = browser.tabs.query({
+            active: true,
+            currentWindow: true
+        });
         gettingActiveTab.then(function (tabs) {
             newURL = tabs[0].url;
             if (urlRegexTester.test(newURL)) {
@@ -13,12 +16,16 @@ function addEvents() {
                         let currPlayList = playList.ytPL;
                         var match = newURL.match(regexMatcher);
                         currPlayList.push(match[2]);
-                        browser.storage.local.set({ ytPL: currPlayList });
+                        browser.storage.local.set({
+                            ytPL: currPlayList
+                        });
                     } else {
                         let currPlayList = playList.ytPL;
                         var match = newURL.match(regexMatcher);
                         currPlayList.push(match[2]);
-                        browser.storage.local.set({ ytPL: currPlayList });
+                        browser.storage.local.set({
+                            ytPL: currPlayList
+                        });
                     }
                 })
             } else {
@@ -35,14 +42,21 @@ function playBtn() {
             if (playList.ytPL.length !== 0 && $('#ytPlayBtn').length == 0) {
                 $("#yt").append($("<input type='button' id='ytPlayBtn' value='Play the Video'>"))
                 $("#ytPlayBtn").on("click", function () {
-                    var gettingActiveTab = browser.tabs.query({ active: true, currentWindow: true });
+                    var gettingActiveTab = browser.tabs.query({
+                        active: true,
+                        currentWindow: true
+                    });
                     gettingActiveTab.then(function (tabs) {
-                        browser.tabs.sendMessage(tabs[0].id, { name: "playYt" });
+                        browser.tabs.sendMessage(tabs[0].id, {
+                            name: "playYt"
+                        });
                     });
                 })
             }
         } else {
-            browser.storage.local.set({ ytPL: [] })
+            browser.storage.local.set({
+                ytPL: []
+            })
         }
     })
 }

@@ -28,13 +28,21 @@ function displayPlaylist() {
         })
     }
     browser.storage.local.get("ytPL").then((obj) => {
+        tempArr = []
         let tempPl = obj.ytPL;
         let nrOfItems = tempPl.length;
         const parent = document.getElementById("listWrapper");
-        for (let i = 0; i < nrOfItems; i++) {
-            let child = `<li class="vid"><iframe class="iframez"></iframe><button class="delBtn">Delete video</button></li>`;
-            parent.appendChild(child);
-        }
+        let generatedList = tempPl.forEach(function () {
+            let tempData = `<li class="vid"><iframe class="iframez"></iframe><button class="delBtn">Delete video</button></li>`;
+            tempArr.push(tempData);
+        })
+
+        parent.innerHTML = tempArr.join("");
+
+
+        // for (let i = 0; i < nrOfItems; i++) {
+        //     `<li class="vid"><iframe class="iframez"></iframe><button class="delBtn">Delete video</button></li>`;
+        // }
 
         let tempNl = document.querySelectorAll(".iframez");
         let tempBtn = document.querySelectorAll(".delBtn");
