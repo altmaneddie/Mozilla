@@ -23,7 +23,6 @@ function displayPlaylist() {
     let currLis = document.querySelectorAll(".vid");
     if (currLis.length !== 0) {
         currLis.forEach(function (el) {
-            // el.parentNode.removeChild(el);
             $("#listWrapper").html("");
         })
     }
@@ -38,14 +37,9 @@ function displayPlaylist() {
         })
 
         parent.innerHTML = tempArr.join("");
-
-
-        // for (let i = 0; i < nrOfItems; i++) {
-        //     `<li class="vid"><iframe class="iframez"></iframe><button class="delBtn">Delete video</button></li>`;
-        // }
-
         let tempNl = document.querySelectorAll(".iframez");
         let tempBtn = document.querySelectorAll(".delBtn");
+
         tempNl.forEach(function (el, ind) {
             $(el).attr({
                 id: ind,
@@ -91,7 +85,7 @@ function addURL() {
     }
 }
 
-function userOptCreator() {
+function userOptCreator(e) {
     e.preventDefault;
 
     let userOpt = {};
@@ -103,11 +97,12 @@ function userOptCreator() {
     userOpt.hposition = hposition;
     userOpt.vposition = vposition;
     userOpt.size = size;
-
+    console.log(userOpt);
     browser.storage.local.set({
         options: userOpt
     });
 }
+
 
 
 $("#addVidBtn").on("click", addURL);
