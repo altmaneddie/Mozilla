@@ -12,8 +12,7 @@ function addEventsToRandomBtn() {
 
 function addStylingToVid(id) {
     let myVid = $("#tehVideo");
-    let myWrapper = $("#ytWrapper");
-
+    let myWrapper = document.getElementById("ytWrapper");
     var ytApp = {
         "position": "fixed",
         "height": "auto",
@@ -22,37 +21,34 @@ function addStylingToVid(id) {
     }
 
     browser.storage.local.get("options").then((opt) => {
-        console.log(opt.options.hposition, opt.options.vposition);
-        console.log(opt);
+        console.log(opt.options.hposition);
         switch (opt.options.hposition) {
             case "Left":
-                ytApp.left = "2%";
+                myWrapper.style.left = "2%";
                 break;
             case "Right":
-                ytApp.right = "2%";
+                myWrapper.style.right = "2%";
                 break;
             default:
-                ytApp.left = "2%";
+                myWrapper.style.left = "2%";
         }
-        console.log(ytApp);
-
+        console.log(opt.options.vposition);
         switch (opt.options.vposition) {
             case "Top":
-                ytApp.top = "15%";
+                myWrapper.style.top = "5%";
                 break;
             case "Middle":
-                ytApp.top = "35%";
+                myWrapper.style.top = "35%";
                 break;
             case "Lower":
-                ytApp.top = "50%";
+                myWrapper.style.top = "50%";
                 break;
             case "Bottom":
-                ytApp.top = "85%";
+                myWrapper.style.top = "85%";
                 break;
             default:
-                ytApp.top = "50%";
+                myWrapper.style.top = "50%";
         }
-        console.log(ytApp);
         switch (opt.options.size) {
             case "240p":
                 $(myVid).attr({
@@ -83,6 +79,7 @@ function addStylingToVid(id) {
                     width: "480",
                     height: "360",
                 });
+
         }
     })
     $(myWrapper).css(ytApp);
