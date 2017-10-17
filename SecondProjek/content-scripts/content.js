@@ -24,27 +24,27 @@ function addStylingToVid(id) {
         console.log(opt.options.hposition);
         switch (opt.options.hposition) {
             case "Left":
-                myWrapper.style.left = "2%";
+                myWrapper.style.left = "1%";
                 break;
             case "Right":
-                myWrapper.style.right = "2%";
+                myWrapper.style.right = "1%";
                 break;
             default:
-                myWrapper.style.left = "2%";
+                myWrapper.style.left = "1%";
         }
         console.log(opt.options.vposition);
         switch (opt.options.vposition) {
             case "Top":
-                myWrapper.style.top = "5%";
+                myWrapper.style.top = "1%";
                 break;
             case "Middle":
-                myWrapper.style.top = "35%";
+                myWrapper.style.top = "20%";
                 break;
             case "Lower":
-                myWrapper.style.top = "50%";
+                myWrapper.style.bottom = "15%";
                 break;
             case "Bottom":
-                myWrapper.style.top = "85%";
+                myWrapper.style.bottom = "1%";
                 break;
             default:
                 myWrapper.style.top = "50%";
