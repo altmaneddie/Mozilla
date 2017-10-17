@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "Sir Tubes-A-lot",
     "description": "Take your favorite videos with you anytime!",
-    "version": "1.0",
+    "version": "1.1",
     "icons": {
       "48":"icons/icon64.png"
     },
