@@ -3,6 +3,9 @@
     "name": "Sir Tubes-A-lot",
     "description": "Take your favorite videos with you anytime!",
     "version": "1.0",
+    "icons": {
+      "48":"icons/icon64.png"
+    },
   
     "browser_action": {
       "default_icon": "icons/icon.png",
