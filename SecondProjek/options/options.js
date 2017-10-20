@@ -41,6 +41,7 @@ function displayPlaylist() {
         let tempBtn = document.querySelectorAll(".delBtn");
 
         tempNl.forEach(function (el, ind) {
+
             $(el).attr({
                 id: ind,
                 width: "320",
@@ -49,6 +50,7 @@ function displayPlaylist() {
                 frameborder: "0"
             });
         })
+
         tempBtn.forEach(function (el, ind) {
             $(el).attr("id", ind);
         })

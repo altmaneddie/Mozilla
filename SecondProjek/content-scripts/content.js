@@ -11,6 +11,7 @@ function addEventsToRandomBtn() {
 }
 
 function addStylingToVid(id) {
+
     let myVid = $("#tehVideo");
     let myWrapper = document.getElementById("ytWrapper");
     var ytApp = {
@@ -19,6 +20,26 @@ function addStylingToVid(id) {
         "width": "auto",
         "z-index": "9999"
     }
+
+    //html escape
+    var entityMap = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;',
+        '/': '&#x2F;',
+        '`': '&#x60;',
+        '=': '&#x3D;'
+    };
+
+    function escapeHtml(string) {
+        return String(string).replace(/[&<>"'`=\/]/g, function (s) {
+            return entityMap[s];
+        });
+    }
+
+
 
     browser.storage.local.get("options").then((opt) => {
         console.log(opt.options.hposition);
@@ -83,7 +104,7 @@ function addStylingToVid(id) {
         }
     })
     $(myWrapper).css(ytApp);
-    $(myVid).attr("src", `https://www.youtube.com/embed/${id}`)
+    $(myVid).attr("src", `https://www.youtube.com/embed/${escapeHtml(id)}`)
 
 }
 
