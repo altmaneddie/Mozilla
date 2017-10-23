@@ -39,8 +39,6 @@ function addStylingToVid(id) {
         });
     }
 
-
-
     browser.storage.local.get("options").then((opt) => {
         console.log(opt.options.hposition);
         switch (opt.options.hposition) {
